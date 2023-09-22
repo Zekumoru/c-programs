@@ -6,10 +6,10 @@
 #include "lib/print-utils.h"
 
 int main() {
-    char input[200];
+    char * input;
     
     printf("Enter string: ");
-    scanf(" %[^\n]s", input);
+    input = getLineInput();
 
     printf("\n");
 
@@ -27,7 +27,9 @@ int main() {
 
     char ** binaries = strToBinaries(input);
     printf("Binary: %s\n", stringifyBinaries(binaries));
+
     freeCharPArray(binaries);
+    free(input);
     
     return 0;
 }

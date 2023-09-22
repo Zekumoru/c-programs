@@ -9,6 +9,20 @@ int getStrLength(char string[]) {
     return length;
 }
 
+char * getLineInput() {
+    char ch;
+    int length = 2;
+    char* string = malloc(length);
+    
+    while ((ch = getchar()) != '\n' && ch != EOF) {
+        string[length - 2] = ch;
+        string = (char*) realloc(string, length);
+        length++;
+    }
+
+    return string;
+}
+
 int getCharPArrSize(char** charPArray) {
     int size = 0;
     while (charPArray[size] != NULL) size++;

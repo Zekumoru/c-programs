@@ -3,6 +3,8 @@
 
 int getStrLength(char[]);
 
+char * getLineInput();
+
 char * stringifyBinaries(char**);
 
 void freeCharPArray(char**);
