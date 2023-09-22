@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lib/conversions.h"
+#include "lib/utils.h"
 
 int main() {
-    // strToBinary("ciao");
-    printf("%s\n", charToBinary('A'));
+    printf("%s\n", stringifyBinaries(strToBinaries("ciao")));
     return 0;
 }

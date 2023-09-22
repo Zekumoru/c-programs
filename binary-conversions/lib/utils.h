@@ -3,4 +3,6 @@
 
 int getStrLength(char[]);
 
+char * stringifyBinaries(char**);
+
 #endif

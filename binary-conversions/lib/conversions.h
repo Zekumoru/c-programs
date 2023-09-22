@@ -3,6 +3,6 @@
 
 char * charToBinary(char);
 
-char ** strToBinary(char[]);
+char ** strToBinaries(char[]);
 
 #endif
