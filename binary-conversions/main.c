@@ -25,7 +25,9 @@ int main() {
     printStrToHex(input);
     printf("\n");
 
-    printf("Binary: %s\n", stringifyBinaries(strToBinaries(input)));
+    char ** binaries = strToBinaries(input);
+    printf("Binary: %s\n", stringifyBinaries(binaries));
+    freeCharPArray(binaries);
     
     return 0;
 }

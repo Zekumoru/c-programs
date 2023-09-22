@@ -5,4 +5,6 @@ int getStrLength(char[]);
 
 char * stringifyBinaries(char**);
 
+void freeCharPArray(char**);
+
 #endif

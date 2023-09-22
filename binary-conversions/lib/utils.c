@@ -35,3 +35,13 @@ char * stringifyBinaries(char** binaries) {
 
     return string;
 }
+
+void freeCharPArray(char** charPArray) {
+    const int size = getCharPArrSize(charPArray);
+
+    for (int i = size - 1; i >= 0; i--) {
+        free(charPArray[i]);
+    }
+
+    free(charPArray);
+}
