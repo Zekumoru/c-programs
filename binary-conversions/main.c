@@ -4,6 +4,7 @@
 #include "lib/conversions.h"
 
 int main() {
-    strToBinary("ciao");
+    // strToBinary("ciao");
+    printf("%s\n", charToBinary('A'));
     return 0;
 }
