@@ -23,7 +23,7 @@ char * stringifyBinaries(char** binaries) {
     
     int stringPos = 0;
     for (int i = 0; i < size; i++) {
-        for (int j = 0; j < ASCII_STRING_SIZE - 2; j++, stringPos++) {
+        for (int j = 0; j < ASCII_STRING_SIZE - 1; j++, stringPos++) {
             string[stringPos] = binaries[i][j];
         }
 
