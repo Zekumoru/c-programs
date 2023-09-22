@@ -8,7 +8,7 @@ char * charToBinary(char ch) {
 
     for (int i = 7, j = 0; i >= 0; i--, j++) {
         char shifted = ch >> j;
-        int bit = (ch & shifted) != 0;
+        int bit = shifted & 1;
         bin[i] = bit == 0 ? '0' : '1';
     }
 
