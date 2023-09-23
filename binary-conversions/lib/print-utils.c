@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "utils.h"
+#include <string.h>
 
 void printStrToOctal(char string[]) {
-    const int length = getStrLength(string);
+    const int length = (int) strlen(string);
 
     for (int i = 0; i < length; i++) {
         printf("%o", string[i]);
@@ -11,7 +11,7 @@ void printStrToOctal(char string[]) {
 }
 
 void printStrToDecimals(char string[]) {
-    const int length = getStrLength(string);
+    const int length = (int) strlen(string);
 
     for (int i = 0; i < length; i++) {
         printf("%d", string[i]);
@@ -20,7 +20,7 @@ void printStrToDecimals(char string[]) {
 }
 
 void printStrToHex(char string[]) {
-    const int length = getStrLength(string);
+    const int length = (int) strlen(string);
 
     for (int i = 0; i < length; i++) {
         printf("%X", string[i]);

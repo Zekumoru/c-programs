@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "utils.h"
+#include <string.h>
 #include "constants.h"
 #include "conversions.h"
 
@@ -17,7 +17,7 @@ char * charToBinary(char ch) {
 }
 
 char ** strToBinaries(char string[]) {
-    const int length = getStrLength(string);
+    const int length = (int) strlen(string);
     char ** binaries = malloc((length + 1) * sizeof(char*)); // length + 1 where the +1 is for null
 
     for (int i = length - 1; i >= 0; i--) {
