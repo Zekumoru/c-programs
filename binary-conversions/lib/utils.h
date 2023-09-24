@@ -6,6 +6,7 @@
 char * getLineInput();
 
 char * stringifyBinaries(char**);
+char * stringifyCharPArray(char**);
 char * stringifyIntPArray(int**);
 
 void freeCharPArray(char**);

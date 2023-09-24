@@ -73,6 +73,35 @@ void * reallocateArray(void* arr, int length, int* allocLength) {
     return realloc(arr, *allocLength);
 }
 
+char * fixStringAlloc(char* string, int length) {
+    // Allocate a new char pointer string with the actual length
+    char * fixedString = malloc(length);
+    memcpy(fixedString, string, length);
+    free(string);
+
+    return fixedString;
+}
+
+char * stringifyCharPArray(char** charPArray) {
+    int allocLength = 1;
+    int length = allocLength;
+    char * string = malloc(allocLength);
+
+    for (int i = 0; charPArray[i] != NULL; i++) {
+        char * item = charPArray[i];
+        int itemLength = strlen(item) + 1;
+        if (charPArray[i + 1] == NULL) length--;
+
+        length += itemLength;
+        string = (char*) reallocateArray(string, length, &allocLength);
+
+        strcat(string, item);
+        if (charPArray[i + 1] != NULL) strcat(string, " ");
+    }
+
+    return fixStringAlloc(string, length);
+}
+
 char * stringifyIntPArray(int** intPArray) {
     int allocLength = 1; 
     int length = allocLength;
@@ -94,12 +123,7 @@ char * stringifyIntPArray(int** intPArray) {
         if (intPArray[i + 1] != NULL) strcat(string, " ");
     }
 
-    // Allocate a new char pointer string with the actual length
-    char * returnString = malloc(length);
-    memcpy(returnString, string, length);
-    free(string);
-
-    return returnString;
+    return fixStringAlloc(string, length);
 }
 
 void freeCharPArray(char** charPArray) {

@@ -15,20 +15,20 @@ int main() {
 
     int ** decimals = strToDecimals(input);
     printf("Decimal: %s\n", stringifyIntPArray(decimals));
-    freeIntPArray(decimals);
 
-    printf("Octal: ");
-    printStrToOctal(input);
-    printf("\n");
+    char ** octals = strToOctals(input);
+    printf("Octal: %s\n", stringifyCharPArray(octals));
 
     printf("Hex: ");
     printStrToHex(input);
     printf("\n");
 
     char ** binaries = strToBinaries(input);
-    printf("Binary: %s\n", stringifyBinaries(binaries));
-    freeCharPArray(binaries);
+    printf("Binary: %s\n", stringifyCharPArray(binaries));
 
+    freeIntPArray(decimals);
+    freeCharPArray(binaries);
+    freeCharPArray(octals);
     free(input);
     
     return 0;

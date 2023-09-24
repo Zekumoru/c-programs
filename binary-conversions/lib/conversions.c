@@ -27,6 +27,31 @@ char ** strToBinaries(char string[]) {
     return binaries;
 }
 
+char * charToOctal(char ch) {
+    int digits = 0;
+    for (char temp = ch; temp != 0; temp /= 8) digits++; 
+
+    char * string = malloc(digits + 1); // +1 for null terminator
+
+    for (int i = digits - 1; i >= 0; i--) {
+        string[i] = (char)('0' + (ch % 8));
+        ch /= 8;
+    }
+
+    return string;
+}
+
+char ** strToOctals(char string[]) {
+    const int length = (int) strlen(string);
+    char ** octals = malloc((length + 1) * sizeof(char*)); // length + 1 where the +1 is for null
+
+    for (int i = length - 1; i >= 0; i--) {
+        octals[i] = charToOctal(string[i]);
+    }
+
+    return octals;
+}
+
 int ** strToDecimals(char string[]) {
     const int length = (int) strlen(string);
     int ** decimals = malloc((length + 1) * sizeof(int*));
