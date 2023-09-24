@@ -3,7 +3,6 @@
 #include <string.h>
 #include "lib/conversions.h"
 #include "lib/utils.h"
-#include "lib/print-utils.h"
 
 int main() {
     char * input;
