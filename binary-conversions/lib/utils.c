@@ -39,27 +39,6 @@ int getCharPArrSize(char** charPArray) {
     return size;
 }
 
-char * stringifyBinaries(char** binaries) {
-    const int size = getCharPArrSize(binaries);
-    const int strLength = ASCII_STRING_SIZE * size + size; // +size for spaces between binaries and for the null terminator
-    
-    char * string = malloc(strLength);
-    
-    int stringPos = 0;
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < ASCII_STRING_SIZE - 1; j++, stringPos++) {
-            string[stringPos] = binaries[i][j];
-        }
-
-        if ((i - 1) != size) {
-            string[stringPos] = ' ';
-            stringPos++;
-        }
-    }
-
-    return string;
-}
-
 void * reallocateArray(void* arr, int length, int* allocLength) {
     char isToAllocate = FALSE;
 
