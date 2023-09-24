@@ -52,6 +52,39 @@ char ** strToOctals(char string[]) {
     return octals;
 }
 
+char * charToHex(char ch) {
+    int digits = 0;
+    for (char temp = ch; temp != 0; temp /= 16) digits++; 
+
+    char * string = malloc(digits + 1); // +1 for null terminator
+
+    for (int i = digits - 1; i >= 0; i--) {
+        int num = ch % 16;
+
+        if (num >= 10) {
+            num -= 10;
+            string[i] = (char)('A' + num);
+        } else {
+            string[i] = (char)('0' + num);
+        }
+
+        ch /= 16;
+    }
+
+    return string;
+}
+
+char ** strToHexes(char string[]) {
+    const int length = (int) strlen(string);
+    char ** hexes = malloc((length + 1) * sizeof(char*)); // length + 1 where the +1 is for null
+
+    for (int i = length - 1; i >= 0; i--) {
+        hexes[i] = charToHex(string[i]);
+    }
+
+    return hexes;
+}
+
 int ** strToDecimals(char string[]) {
     const int length = (int) strlen(string);
     int ** decimals = malloc((length + 1) * sizeof(int*));

@@ -13,23 +13,23 @@ int main() {
 
     printf("\n");
 
-    int ** decimals = strToDecimals(input);
-    printf("Decimal: %s\n", stringifyIntPArray(decimals));
+    // int ** decimals = strToDecimals(input);
+    // printf("Decimal: %s\n", stringifyIntPArray(decimals));
 
-    char ** octals = strToOctals(input);
-    printf("Octal: %s\n", stringifyCharPArray(octals));
+    // char ** octals = strToOctals(input);
+    // printf("Octal: %s\n", stringifyCharPArray(octals));
+    
+    char ** hexes = strToHexes(input);
+    printf("Hex: %s\n", stringifyCharPArray(hexes));
 
-    printf("Hex: ");
-    printStrToHex(input);
-    printf("\n");
+    // char ** binaries = strToBinaries(input);
+    // printf("Binary: %s\n", stringifyCharPArray(binaries));
 
-    char ** binaries = strToBinaries(input);
-    printf("Binary: %s\n", stringifyCharPArray(binaries));
-
-    freeIntPArray(decimals);
-    freeCharPArray(binaries);
-    freeCharPArray(octals);
-    free(input);
+    // freeIntPArray(decimals);
+    // freeCharPArray(binaries);
+    // freeCharPArray(octals);
+    // // freeCharPArray(hexes);
+    // free(input);
     
     return 0;
 }

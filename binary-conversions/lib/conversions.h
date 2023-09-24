@@ -2,10 +2,12 @@
 #define CONVERSIONS_H
 
 char * charToBinary(char);
-char * charToOctal(char ch);
+char * charToOctal(char);
+char * charToHex(char);
 
 char ** strToBinaries(char[]);
 char ** strToOctals(char[]);
+char ** strToHexes(char[]);
 
 int ** strToDecimals(char[]);
 
