@@ -5,6 +5,7 @@
 
 char * charToBinary(char ch) {
     char * bin = malloc(ASCII_STRING_SIZE);
+    bin[ASCII_STRING_SIZE - 1] = '\0';
 
     //  -2 because of the null terminator character and end of string
     for (int i = ASCII_STRING_SIZE - 2, j = 0; i >= 0; i--, j++) {
@@ -21,6 +22,7 @@ char * charToOctal(char ch) {
     for (char temp = ch; temp != 0; temp /= 8) digits++; 
 
     char * string = malloc(digits + 1); // +1 for null terminator
+    string[digits] = '\0';
 
     for (int i = digits - 1; i >= 0; i--) {
         string[i] = (char)('0' + (ch % 8));
@@ -35,6 +37,7 @@ char * charToHex(char ch) {
     for (char temp = ch; temp != 0; temp /= 16) digits++; 
 
     char * string = malloc(digits + 1); // +1 for null terminator
+    string[digits] = '\0';
 
     for (int i = digits - 1; i >= 0; i--) {
         int num = ch % 16;
