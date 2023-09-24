@@ -76,7 +76,7 @@ void * reallocateArray(void* arr, int length, int* allocLength) {
 char * fixStringAlloc(char* string, int length) {
     // Allocate a new char pointer string with the actual length
     char * fixedString = malloc(length);
-    memcpy(fixedString, string, length);
+    memcpy(fixedString, string, length - 1);
     free(string);
 
     return fixedString;
