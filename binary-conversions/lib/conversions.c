@@ -16,17 +16,6 @@ char * charToBinary(char ch) {
     return bin;
 }
 
-char ** strToBinaries(char string[]) {
-    const int length = (int) strlen(string);
-    char ** binaries = malloc((length + 1) * sizeof(char*)); // length + 1 where the +1 is for null
-
-    for (int i = length - 1; i >= 0; i--) {
-        binaries[i] = charToBinary(string[i]);
-    }
-
-    return binaries;
-}
-
 char * charToOctal(char ch) {
     int digits = 0;
     for (char temp = ch; temp != 0; temp /= 8) digits++; 
@@ -39,17 +28,6 @@ char * charToOctal(char ch) {
     }
 
     return string;
-}
-
-char ** strToOctals(char string[]) {
-    const int length = (int) strlen(string);
-    char ** octals = malloc((length + 1) * sizeof(char*)); // length + 1 where the +1 is for null
-
-    for (int i = length - 1; i >= 0; i--) {
-        octals[i] = charToOctal(string[i]);
-    }
-
-    return octals;
 }
 
 char * charToHex(char ch) {
@@ -74,15 +52,29 @@ char * charToHex(char ch) {
     return string;
 }
 
-char ** strToHexes(char string[]) {
+char ** convertString(char string[], int type) {
     const int length = (int) strlen(string);
-    char ** hexes = malloc((length + 1) * sizeof(char*)); // length + 1 where the +1 is for null
+    char ** converts = malloc((length + 1) * sizeof(char*)); // length + 1 where the +1 is for null
 
     for (int i = length - 1; i >= 0; i--) {
-        hexes[i] = charToHex(string[i]);
+        char * converted;
+
+        switch (type) {
+            case BINARY_TYPE:
+                converted = charToBinary(string[i]);
+                break;
+            case OCTAL_TYPE:
+                converted = charToOctal(string[i]);
+                break;
+            case HEX_TYPE:
+            default:
+                converted = charToHex(string[i]);
+        }
+
+        converts[i] = converted;
     }
 
-    return hexes;
+    return converts;
 }
 
 int ** strToDecimals(char string[]) {
