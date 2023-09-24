@@ -62,6 +62,8 @@ char * fixStringAlloc(char* string, int length) {
 }
 
 char * stringifyCharPArray(char** charPArray) {
+    if (charPArray[0] == NULL) return NULL;
+
     int allocLength = 1;
     int length = allocLength;
     char * string = malloc(allocLength);
@@ -82,6 +84,8 @@ char * stringifyCharPArray(char** charPArray) {
 }
 
 char * stringifyIntPArray(int** intPArray) {
+    if (intPArray[0] == NULL) return NULL;
+
     int allocLength = 1; 
     int length = allocLength;
     char * string = malloc(allocLength);
