@@ -4,44 +4,10 @@
 #include "constants.h"
 #include "utils.h"
 
-char * getLineInput() {
-    char ch;
-    int length = 1;
-    int allocLength = 2;
-    char * string = malloc(length);
-    
-    while ((ch = getchar()) != '\n' && ch != EOF) {
-        length++;
-        string[length - 2] = ch;
-
-        // Memory reallocation of O(n log n)
-        if (length >= allocLength) {
-            string = (char*) realloc(string, allocLength);
-            allocLength *= 2;
-        }
-    }
-
-    if (length == 1) {
-        return string;
-    }
-
-    // Allocate a new char pointer string with the actual length
-    char * returnString = malloc(length);
-    memcpy(returnString, string, length);
-    free(string);
-
-    return returnString;
-}
-
-int getCharPArrSize(char** charPArray) {
-    int size = 0;
-    while (charPArray[size] != NULL) size++;
-    return size;
-}
-
 void * reallocateArray(void* arr, int length, int* allocLength) {
     char isToAllocate = FALSE;
 
+    // Memory reallocation of O(n log n)
     while (length >= *allocLength) {
         *allocLength *= 2;
         isToAllocate = TRUE;
@@ -59,6 +25,27 @@ char * fixStringAlloc(char* string, int length) {
     free(string);
 
     return fixedString;
+}
+
+char * getLineInput() {
+    char ch;
+    int length = 1;
+    int allocLength = 2;
+    char * string = malloc(length);
+    
+    while ((ch = getchar()) != '\n' && ch != EOF) {
+        length++;
+        string[length - 2] = ch;
+        string = (char*) reallocateArray(string, length, &allocLength);
+    }
+
+    return fixStringAlloc(string, length);
+}
+
+int getCharPArrSize(char** charPArray) {
+    int size = 0;
+    while (charPArray[size] != NULL) size++;
+    return size;
 }
 
 char * stringifyCharPArray(char** charPArray) {
