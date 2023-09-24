@@ -13,9 +13,9 @@ int main() {
 
     printf("\n");
 
-    printf("Decimal: ");
-    printStrToDecimals(input);
-    printf("\n");
+    int ** decimals = strToDecimals(input);
+    printf("Decimal: %s\n", stringifyIntPArray(decimals));
+    freeIntPArray(decimals);
 
     printf("Octal: ");
     printStrToOctal(input);
@@ -27,8 +27,8 @@ int main() {
 
     char ** binaries = strToBinaries(input);
     printf("Binary: %s\n", stringifyBinaries(binaries));
-
     freeCharPArray(binaries);
+
     free(input);
     
     return 0;

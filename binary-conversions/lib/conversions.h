@@ -5,4 +5,6 @@ char * charToBinary(char);
 
 char ** strToBinaries(char[]);
 
+int ** strToDecimals(char[]);
+
 #endif

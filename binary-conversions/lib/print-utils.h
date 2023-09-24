@@ -3,8 +3,6 @@
 
 void printStrToOctal(char[]);
 
-void printStrToDecimals(char[]);
-
 void printStrToHex(char[]);
 
 #endif

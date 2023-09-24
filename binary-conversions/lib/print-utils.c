@@ -10,15 +10,6 @@ void printStrToOctal(char string[]) {
     }
 }
 
-void printStrToDecimals(char string[]) {
-    const int length = (int) strlen(string);
-
-    for (int i = 0; i < length; i++) {
-        printf("%d", string[i]);
-        if ((i - 1) != length) printf(" ");
-    }
-}
-
 void printStrToHex(char string[]) {
     const int length = (int) strlen(string);
 

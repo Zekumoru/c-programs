@@ -26,3 +26,15 @@ char ** strToBinaries(char string[]) {
 
     return binaries;
 }
+
+int ** strToDecimals(char string[]) {
+    const int length = (int) strlen(string);
+    int ** decimals = malloc((length + 1) * sizeof(int*));
+
+    for (int i = length - 1; i >= 0; i--) {
+        decimals[i] = malloc(sizeof(int));
+        decimals[i][0] = (int) string[i];
+    }
+
+    return decimals;
+}

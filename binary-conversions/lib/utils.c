@@ -60,6 +60,48 @@ char * stringifyBinaries(char** binaries) {
     return string;
 }
 
+void * reallocateArray(void* arr, int length, int* allocLength) {
+    char isToAllocate = FALSE;
+
+    while (length >= *allocLength) {
+        *allocLength *= 2;
+        isToAllocate = TRUE;
+    }
+
+    if (!isToAllocate) return arr;
+
+    return realloc(arr, *allocLength);
+}
+
+char * stringifyIntPArray(int** intPArray) {
+    int allocLength = 1; 
+    int length = allocLength;
+    char * string = malloc(allocLength);
+
+    for (int i = 0; intPArray[i] != NULL; i++) {
+        int num = intPArray[i][0];
+        // get how many digits there are inside 'num' plus the null terminator
+        int numLength = snprintf(NULL, 0, "%d", num) + 1;
+        length += numLength;
+        if (intPArray[i + 1] == NULL) length--;
+
+        char * numString = malloc(numLength);
+        snprintf(numString, numLength, "%d", num);
+
+        string = (char*) reallocateArray(string, length, &allocLength);
+
+        strcat(string, numString);
+        if (intPArray[i + 1] != NULL) strcat(string, " ");
+    }
+
+    // Allocate a new char pointer string with the actual length
+    char * returnString = malloc(length);
+    memcpy(returnString, string, length);
+    free(string);
+
+    return returnString;
+}
+
 void freeCharPArray(char** charPArray) {
     const int size = getCharPArrSize(charPArray);
 
@@ -68,4 +110,12 @@ void freeCharPArray(char** charPArray) {
     }
 
     free(charPArray);
+}
+
+void freeIntPArray(int** intPArray) {
+    for (int i = 0; intPArray[i] != NULL; i++) {
+        free(intPArray[i]);
+    }
+
+    free(intPArray);
 }
