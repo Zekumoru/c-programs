@@ -1,53 +1,17 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string.h>
-
-void println(const char *fmt, ...);
-char* getln();
+#include "lib/utils.h"
 
 int main(int argc, char** argv) {
-    char * name;
+    int num1;
+    int num2;
 
-    printf("Enter name: ");
-    name = getln();
+    printf("Enter first number: ");
+    num1 = getInt();
 
-    println("Hello from %s!", name);
+    printf("Enter second number: ");
+    num2 = getInt();
+
+    println("Their sum is: %d", num1 + num2);
 
     return 0;
-}
-
-void println(const char *fmt, ...) {
-    va_list args;
-    va_start(args, fmt);
-    
-    vprintf(fmt, args);
-    printf("\n");
-
-    va_end(args);
-}
-
-char* getln() {
-    int size = 1;
-    int allocSize = 1;
-    char * line = malloc(allocSize);
-    line[0] = '\0';
-
-    char ch;
-    while ((ch = getchar()) != '\n' && ch != EOF) {
-        line[size - 1] = ch;
-
-        size++;
-        if (size >= allocSize) {
-            allocSize *= 2;
-            line = (char*) realloc(line, allocSize);
-        }
-    }
-    
-    char * string = malloc(size);
-    memcpy(string, line, size);
-    string[size - 1] = '\0';
-    free(line);
-
-    return string;
 }

@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc main.c -o output/main && output/main
+gcc main.c lib/utils.c -o output/main && output/main
