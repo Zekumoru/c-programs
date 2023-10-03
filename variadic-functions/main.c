@@ -2,16 +2,16 @@
 #include "lib/utils.h"
 
 int main(int argc, char** argv) {
-    int num1;
-    int num2;
+    float num1;
+    float num2;
 
     printf("Enter first number: ");
-    num1 = getInt();
+    num1 = getFloatComma();
 
     printf("Enter second number: ");
-    num2 = getInt();
+    num2 = getFloatComma();
 
-    println("Their sum is: %d", num1 + num2);
+    println("Their sum is: %.2f", num1 + num2);
 
     return 0;
 }
