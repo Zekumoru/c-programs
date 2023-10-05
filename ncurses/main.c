@@ -1,10 +1,5 @@
-#include <ncurses.h>
+#include "programs/01-hello-world.h"
 
 int main() {
-    initscr();
-    printw("Hello world! Press any key to exit...");
-    refresh();
-    getch();
-    endwin();
-    return 0;
+    return program01();
 }

@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc main.c -o output/main -lncurses && output/main
+gcc main.c programs/*.c -o output/main -lncurses && output/main
