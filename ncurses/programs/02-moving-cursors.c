@@ -1,3 +1,4 @@
+#include "02-moving-cursors.h"
 #include <ncurses.h>
 
 int program02() {
