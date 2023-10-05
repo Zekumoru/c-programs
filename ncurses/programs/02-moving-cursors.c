@@ -20,4 +20,6 @@ int program02() {
     getch();
 
     endwin();
+
+    return 0;
 }
