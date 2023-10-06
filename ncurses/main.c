@@ -4,7 +4,8 @@
 #include "programs/04-borders-and-env-options.h"
 #include "programs/05-attr-and-colors.h"
 #include "programs/06-terminal-info.h"
+#include "programs/07-user-input.h"
 
 int main() {
-    return program06();
+    return program07();
 }
