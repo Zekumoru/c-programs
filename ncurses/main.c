@@ -2,7 +2,8 @@
 #include "programs/02-moving-cursors.h"
 #include "programs/03-windows-basics.h"
 #include "programs/04-borders-and-env-options.h"
+#include "programs/05-attr-and-colors.h"
 
 int main() {
-    return program04();
+    return program05();
 }
