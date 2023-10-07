@@ -1,0 +1,18 @@
+#ifndef MENU_H
+#define MENU_H
+
+#define HELLO_WORLD_OPTION 0
+#define MOVING_CURSORS_OPTION 1
+#define WINDOWS_BASICS_OPTION 2
+#define BORDERS_AND_ENV_OPTIONS_OPTION 3
+#define ATTR_AND_COLORS_OPTION 4
+#define TERMINAL_INFO_OPTION 5
+#define USER_INPUT_OPTION 6
+#define QUIT_OPTION 7
+#define OPTIONS_SIZE 8
+
+extern const char * OPTIONS[OPTIONS_SIZE];
+
+int showMenu();
+
+#endif
