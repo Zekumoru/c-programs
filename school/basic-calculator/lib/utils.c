@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include <stdbool.h>
 #define BACKSPACE_CODE 7
 
 void printwln(const char * fmt, ...) {
@@ -28,7 +29,9 @@ char * sgetwln(const char * string) {
     }
 
     char ch;
+    bool backspaceUp = false;
     while ((ch = getch()) != '\n' && ch != EOF) {
+
         if (ch == BACKSPACE_CODE || ch == KEY_BACKSPACE || ch == '\b') {
             if (length <= 1) {
                 move(getcury(stdscr), getcurx(stdscr) + 1);
@@ -36,7 +39,15 @@ char * sgetwln(const char * string) {
             }
 
             mvprintw(getcury(stdscr), getcurx(stdscr), " ");
-            move(getcury(stdscr), getcurx(stdscr) - 1);
+            if (getcurx(stdscr) == 1 && backspaceUp) {
+                move(getcury(stdscr) - 1, getmaxx(stdscr) - 1);
+                printw(" ");
+                move(getcury(stdscr) - 1, getmaxx(stdscr) - 1);
+            } else {
+                backspaceUp = getcurx(stdscr) == 1;
+                move(getcury(stdscr), getcurx(stdscr) - 1);
+            }
+
             line[length - 2] = '\0';
             length--;
             continue;
