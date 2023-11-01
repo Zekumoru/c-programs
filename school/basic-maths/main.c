@@ -2,8 +2,10 @@
 #include "lib/basicmaths.h"
 
 int main() {
-    int num = 1;
-    printf("sqroot(%d) = %d\n", num, sqroot(num));
+    printf("%d\n", divide(10, 3));
+    printf("%d\n", divide(-10, 3));
+    printf("%d\n", divide(10, -3));
+    printf("%d\n", divide(-10, -3));
 
     return 0;
 }
