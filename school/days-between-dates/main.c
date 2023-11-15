@@ -21,15 +21,14 @@ int main()
 {
     Date *d1 = NULL;
     Date *d2 = NULL;
-    int option = 1;
 
-    // int option = showInteractiveMenu("Scegli il formatto della data:", options, optionsSize);
-    // if (option == optionsSize - 1) return 0;
+    int option = showInteractiveMenu("Scegli il formatto della data:", options, optionsSize);
+    if (option == optionsSize - 1) return 0;
 
     d1 = getDateInput("Inserisci la prima data", option);
     d2 = getDateInput("Inserisci la seconda data", option);
 
-    println("I numeri di giorni tra quelle date sono: %d", countDays(d1, d2));
+    println("I numeri di giorni tra quelle date sono: %d giorni", countDays(d1, d2));
     
     return 0;
 }
