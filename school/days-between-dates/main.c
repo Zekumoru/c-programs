@@ -28,6 +28,8 @@ int main()
 
     d1 = getDateInput("Inserisci la prima data", option);
     d2 = getDateInput("Inserisci la seconda data", option);
+
+    println("I numeri di giorni tra quelle date sono: %d", countDays(d1, d2));
     
     return 0;
 }

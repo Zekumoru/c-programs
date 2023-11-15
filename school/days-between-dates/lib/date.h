@@ -34,9 +34,9 @@ enum DateValidation {
 };
 
 Date *createDate(int year, int month, int day);
-int countDays(Date d1, Date d2);
+int countDays(Date *d1, Date *d2);
 
-struct tm *dateToTm(Date date);
+struct tm *dateToTm(Date *date);
 
 bool isLeapYear(int year);
 int validateDateFmt(const char *input, const char* fmt, Date **out, int *maxDay);
