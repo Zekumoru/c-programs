@@ -53,7 +53,7 @@ int countDays(Date *d1, Date *d2)
     int days1 = daysSinceStartOfYear(d1);
     int days2 = 365 - daysSinceStartOfYear(d2);
     int days = (abs(d1->year - d2->year) - 1) * 365 + days1 + days2;
-    return days + countLeapYearsBetween(d1->year, d2->year);
+    return abs(days + countLeapYearsBetween(d1->year, d2->year));
 }
 
 bool isLeapYear(int year)
