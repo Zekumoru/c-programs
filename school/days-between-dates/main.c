@@ -12,8 +12,8 @@ const char *options[] = {
 
 int main()
 {
-    int option = showInteractiveMenu("Scegli il formatto della data:", options, optionsSize);
-    println("%d", option);
+    // int option = showInteractiveMenu("Scegli il formatto della data:", options, optionsSize);
+    println("%s", isLeapYear(1900)? "true" : "false");
 
     return 0;
 }

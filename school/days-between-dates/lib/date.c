@@ -25,3 +25,8 @@ int countDays(Date d1, Date d2)
     time_t t2 = mktime(dateToTm(d2));
     return (t1 - t2) / SEC_PER_DAY;
 }
+
+bool isLeapYear(int year)
+{
+    return (year % 400) == 0 || (year % 100 && (year % 4) == 0);
+}
