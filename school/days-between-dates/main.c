@@ -1,6 +1,7 @@
-#include <stdio.h>
 #include "lib/date.h"
 #include "lib/utils.h"
+#include "lib/date-input.h"
+#include <stdlib.h>
 
 const int optionsSize = 4;
 const char *options[] = {
@@ -9,13 +10,6 @@ const char *options[] = {
     "aaaa/mm/gg",
     "Esci"
 };
-const char *dateFormats[] = {
-    "dd/mm/yyyy",
-    "mm/dd/yyyy",
-    "yyyy/mm/dd"
-};
-
-Date *getDateInput(const char *prompt, int fmtOption);
 
 int main()
 {
@@ -30,34 +24,8 @@ int main()
 
     println("I numeri di giorni tra quelle date sono: %d giorni", countDays(d1, d2));
     
+    free(d1);
+    free(d2);
+
     return 0;
-}
-
-Date *getDateInput(const char *prompt, int fmtOption)
-{
-    Date *date;
-    int validationResult;
-    
-    do {
-        printf("%s [%s]: ", prompt, dateFormats[fmtOption]);
-        const char *input = getln();
-        
-        int maxDay = 0;
-        validationResult = validateDateFmt(input, dateFormats[fmtOption], &date, &maxDay);
-        switch (validationResult) {
-            case LENGTH_ERROR:
-            case FORMAT_ERROR:
-                println("[ERRORE] Rispettare il formatto della data!");
-                break;
-            case MONTH_ERROR:
-                println("[ERRORE] Il mese non e' valido! Dev'essere tra 1 e 12.");
-                break;
-            case DAY_ERROR:
-                println("[ERRORE] Il giorno non e' valido! Dev'essere tra 1 e %d.", maxDay);
-                break;
-        }
-        println("");
-    } while (validationResult != DATE_OK);
-
-    return date;
 }
