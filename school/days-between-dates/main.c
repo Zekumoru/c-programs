@@ -2,6 +2,7 @@
 #include "lib/utils.h"
 #include "lib/date-input.h"
 #include <stdlib.h>
+#include <math.h>
 
 const int optionsSize = 4;
 const char *options[] = {

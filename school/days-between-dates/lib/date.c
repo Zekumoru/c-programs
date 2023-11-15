@@ -1,6 +1,5 @@
 #include "date.h"
 #include "utils.h"
-#include <time.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
@@ -16,24 +15,45 @@ Date *createDate(int year, int month, int day)
     return date;
 }
 
-struct tm *dateToTm(Date *date)
+int daysSinceStartOfYear(Date *date)
 {
-    struct tm *timeStruct;
+    // Totals days assuming each month has 31 days 
+    // minus 2 days because of February
+    // not minus 3 days since the other 1 day is
+    // calculated with diffFH
+    int days = date->month * 31 - 2 + date->day;
 
-    time_t raw = time(NULL);
-    timeStruct = localtime(&raw);
-    timeStruct->tm_year = date->year - 1900;
-    timeStruct->tm_mon = date->month;
-    timeStruct->tm_mday = date->day;
+    // diff first half of year
+    // basically how many 30-days month before JULY
+    int diffFH = JULY - date->month;
+    if (date->month > JULY) diffFH = JULY;
+    diffFH /= 2;
 
-    return timeStruct;
+    // diff second half of year
+    // basically how many 30-days month after AUGUST
+    int diffSH = date->month - AUGUST;
+    if (diffSH < 0) diffSH = 0;
+    diffSH /= 2;
+
+    return days - (diffFH + diffSH);
+}
+
+int countTotalLeapYears(int year)
+{
+    return (year / 400) - (year / 100) + (year / 4);
+}
+
+int countLeapYearsBetween(int y1, int y2)
+{
+    return abs(countTotalLeapYears(y1) - countTotalLeapYears(y2));
 }
 
 int countDays(Date *d1, Date *d2)
 {
-    time_t t1 = mktime(dateToTm(d1));
-    time_t t2 = mktime(dateToTm(d2));
-    return abs((t1 - t2) / SEC_PER_DAY);
+    int days1 = daysSinceStartOfYear(d1);
+    int days2 = 365 - daysSinceStartOfYear(d2);
+    int days = (abs(d1->year - d2->year) - 1) * 365 + days1 + days2;
+    return days + countLeapYearsBetween(d1->year, d2->year);
 }
 
 bool isLeapYear(int year)

@@ -56,6 +56,15 @@ enum DateValidation {
 Date *createDate(int year, int month, int day);
 
 /**
+ * \brief Calculates the number of days from the beginning of the year to the given date.
+ *
+ * \param date Pointer to the Date structure representing the date.
+ * \return The number of days from the start of the year to the given date.
+ * \note Assumes a valid Date structure is provided.
+ */
+int daysSinceStartOfYear(Date *date);
+
+/**
  * \brief Counts the number of days between two Date structures.
  *
  * \param d1 Pointer to the first Date structure.
@@ -63,14 +72,6 @@ Date *createDate(int year, int month, int day);
  * \return The number of days between the two dates.
  */
 int countDays(Date *d1, Date *d2);
-
-/**
- * \brief Converts a Date structure to a tm structure.
- *
- * \param date Pointer to the Date structure.
- * \return Pointer to the tm structure representing the date.
- */
-struct tm *dateToTm(Date *date);
 
 /**
  * \brief Checks if a given year is a leap year.
