@@ -39,6 +39,6 @@ int countDays(Date d1, Date d2);
 struct tm *dateToTm(Date date);
 
 bool isLeapYear(int year);
-int validateDateFmt(const char *input, const char* fmt, Date **out);
+int validateDateFmt(const char *input, const char* fmt, Date **out, int *maxDay);
 
 #endif // DATE_H

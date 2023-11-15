@@ -45,9 +45,11 @@ bool isdatefmt(char c)
     return c == 'y' || c == 'm' || c == 'd';
 }
 
-int validateDateFmt(const char *input, const char* fmt, Date **out)
+int validateDateFmt(const char *input, const char* fmt, Date **out, int *_maxDay)
 {
-    if (strlen(input) != strlen(fmt)) return LENGTH_ERROR;
+    if (strlen(input) != strlen(fmt)) {
+        return LENGTH_ERROR;
+    }
 
     Date *date = createDate(0, 0, 0);
 
@@ -88,6 +90,7 @@ int validateDateFmt(const char *input, const char* fmt, Date **out)
         maxDay = 31;
     }
     
+    *_maxDay = maxDay;
     if (date->day < 1 || date->day > maxDay) {
         return DAY_ERROR;
     }
