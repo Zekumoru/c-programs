@@ -13,7 +13,7 @@ const char *options[] = {
 int main()
 {
     // int option = showInteractiveMenu("Scegli il formatto della data:", options, optionsSize);
-    println("%s", isLeapYear(1900)? "true" : "false");
+    println("%s", validateDateFmt("02/29/3332", "mm/dd/yyyy") == 0? "true" : "false");
 
     return 0;
 }
