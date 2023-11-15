@@ -33,12 +33,12 @@ enum DateValidation {
     DAY_ERROR
 };
 
-Date createDate(int year, int month, int day);
+Date *createDate(int year, int month, int day);
 int countDays(Date d1, Date d2);
 
 struct tm *dateToTm(Date date);
 
 bool isLeapYear(int year);
-int validateDateFmt(const char *input, const char* fmt);
+int validateDateFmt(const char *input, const char* fmt, Date **out);
 
 #endif // DATE_H

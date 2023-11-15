@@ -13,7 +13,10 @@ const char *options[] = {
 int main()
 {
     // int option = showInteractiveMenu("Scegli il formatto della data:", options, optionsSize);
-    println("%s", validateDateFmt("02/29/3332", "mm/dd/yyyy") == 0? "true" : "false");
+    Date *date;
+    println("%s", validateDateFmt("02/29/3332", "mm/dd/yyyy", &date) == 0? "true" : "false");
 
+    println("%04d/%02d/%02d", date->year, date->month, date->day);
+    
     return 0;
 }

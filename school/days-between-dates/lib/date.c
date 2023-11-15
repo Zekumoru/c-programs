@@ -4,10 +4,15 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
-Date createDate(int year, int month, int day)
+Date *createDate(int year, int month, int day)
 {
-    return (Date){ year, month, day };
+    Date *date = malloc(sizeof(Date));
+    date->year = year;
+    date->month = month;
+    date->day = day;
+    return date;
 }
 
 struct tm *dateToTm(Date date)
@@ -40,24 +45,24 @@ bool isdatefmt(char c)
     return c == 'y' || c == 'm' || c == 'd';
 }
 
-int validateDateFmt(const char *input, const char* fmt)
+int validateDateFmt(const char *input, const char* fmt, Date **out)
 {
     if (strlen(input) != strlen(fmt)) return LENGTH_ERROR;
 
-    Date date = { 0, 0, 0 };
+    Date *date = createDate(0, 0, 0);
 
     for (size_t i = 0; i < strlen(fmt); i++) {
         if (isdigit(input[i]) && isdatefmt(fmt[i])) {
             int digit = input[i] - '0';
             if (fmt[i] == 'y') {
-                date.year *= 10;
-                date.year += digit;
+                date->year *= 10;
+                date->year += digit;
             } else if (fmt[i] == 'm') {
-                date.month *= 10;
-                date.month += digit;
+                date->month *= 10;
+                date->month += digit;
             } else if (fmt[i] == 'd') {
-                date.day *= 10;
-                date.day += digit;
+                date->day *= 10;
+                date->day += digit;
             }
             continue;
         }
@@ -66,26 +71,27 @@ int validateDateFmt(const char *input, const char* fmt)
         }
         return FORMAT_ERROR;
     }
-    date.month--;
+    date->month--;
 
-    if (date.month < JANUARY || date.month > DECEMBER) {
+    if (date->month < JANUARY || date->month > DECEMBER) {
         return MONTH_ERROR;
     }
     
     int maxDay;
-    if (date.month == FEBRUARY) {
-        maxDay = isLeapYear(date.year)? 29 : 28;
-    } else if (date.month % 2 && date.month < JULY) {
+    if (date->month == FEBRUARY) {
+        maxDay = isLeapYear(date->year)? 29 : 28;
+    } else if (date->month % 2 && date->month < JULY) {
         maxDay = 30;
-    } else if (date.month % 2 == 0 && date.month > AUGUST) {
+    } else if (date->month % 2 == 0 && date->month > AUGUST) {
         maxDay = 30;
     } else {
         maxDay = 31;
     }
     
-    if (date.day < 1 || date.day > maxDay) {
+    if (date->day < 1 || date->day > maxDay) {
         return DAY_ERROR;
     }
 
+    if (out != NULL) *out = date;
     return DATE_OK;
 }
