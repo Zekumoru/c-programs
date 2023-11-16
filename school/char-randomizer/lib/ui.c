@@ -89,10 +89,15 @@ int *showGenerateWindow(int *_num)
     int input = 0;
     while (!isEnterKey(input)) {
         wclear(window);
+
+        wprintwln(window, "// GENERATE CHARACTERS");
         wprintwln(window, "How many characters to generate? (Use arrow keys)");
+        wprintwln(window, "");
         wprintwln(window, "             ^^^ (*10)");
         wprintwln(window, "(-10) <-- %d characters --> (+10)", num);
         wprintwln(window, "             vvv (/10)");
+        wprintwln(window, "");
+        wprintwln(window, "Press 'Enter' to generate!");
         wrefresh(window);
         input = getch();
 
@@ -136,6 +141,8 @@ void showLookupWindow(int* countTable, int generatedN)
     while (input != KEY_BACKSPACE) {
         wclear(window);
 
+        wprintwln(window, "// LOOKUP CHARACTER COUNT");
+
         if (countTable == NULL) {
             wprintwln(window, "No characters are generated yet!");
         } else {
@@ -159,6 +166,8 @@ void showLookupWindow(int* countTable, int generatedN)
 void showListCounts(int* countTable, int generatedN)
 {
     endwin();
+    
+    println("// LIST COUNTS // ------------------------------");
 
     if (countTable != NULL) {
         println("Showing count table with %d generated characters", generatedN);
@@ -167,13 +176,13 @@ void showListCounts(int* countTable, int generatedN)
         for (size_t i = 0; i < CHAR_TOTAL; i++) {
             println("[%c]: %d", (char)(i + CHAR_START), countTable[i]);
         }
+        println("");
     } else {
         println("No characters have been generated yet!");
         println("");
     }
 
     println("Press 'Enter' to return to menu...");
-    println("");
     getln();
 
     initscr();
