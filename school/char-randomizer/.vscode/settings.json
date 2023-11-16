@@ -3,6 +3,7 @@
         "randomizer.h": "c",
         "stdio.h": "c",
         "ncurses.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "stdarg.h": "c"
     }
 }
