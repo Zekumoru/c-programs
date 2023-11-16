@@ -73,7 +73,7 @@ int showMenuWindow(const char *title, const char *options[], int optionsSize)
     return choice;
 }
 
-int *showGenerateWindow()
+int *showGenerateWindow(int *_num)
 {
     noecho(); // turn off pressed keys printing out
     curs_set(0); // hide cursor
@@ -111,14 +111,49 @@ int *showGenerateWindow()
         }
     }
 
+    if (_num != NULL) *_num = num;
+
     int *countTable = generateCountTable(num);
     wclear(window);
     wprintwln(window, "Generated %d characters!", num);
-    wprintwln(window, "Press any keys to return to menu...");
+    wprintwln(window, "Press any key to return to menu...");
     wrefresh(window);
     getch();
 
     destroyWindow(window);
 
     return countTable;
+}
+
+void showLookupWindow(int* countTable, int generatedN)
+{
+    noecho(); // turn off pressed keys printing out
+    curs_set(0); // hide cursor
+    keypad(stdscr, true); // allow arrow keys press
+
+    WINDOW *window = newwin(LINES, COLS, 0, 0);
+    refresh();
+
+    int input = 0;
+    while (input != KEY_BACKSPACE) {
+        wclear(window);
+
+        if (countTable == NULL) {
+            wprintwln(window, "No characters are generated yet!");
+        } else {
+            wprintwln(window, "Press a key to look up how many times it has been generated!");
+        }
+        
+        wprintwln(window, "Press backspace '<-' to return to menu...");
+        
+        if (countTable != NULL && CHAR_START <= input && input <= CHAR_END) {
+            wprintwln(window, "");
+            wprintwln(window, "    '%c' occurred %d times in %d characters!", input, countTable[getTableKey(input)], generatedN);
+        }
+
+        wrefresh(window);
+        input = getch();
+    }
+
+    destroyWindow(window);
 }

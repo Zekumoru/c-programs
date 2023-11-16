@@ -10,6 +10,7 @@ bool isEnterKey(int key);
 void destroyWindow(WINDOW *window);
 
 int showMenuWindow(const char *title, const char *options[], int optionsSize);
-int *showGenerateWindow();
+int *showGenerateWindow(int *num);
+void showLookupWindow(int* countTable, int generatedN);
 
 #endif // UI_H

@@ -22,12 +22,17 @@ int main()
     srand(time(NULL));
     initscr();
 
-    int *countTable;
+    int *countTable = NULL;
+    int generatedN = 0;
+
     int option;
     while ((option = showMenuWindow("Character Generator", options, optionsSize)) != EXIT_OPTION) {
         switch (option) {
         case GENERATE_OPTION:
-            countTable = showGenerateWindow();
+            countTable = showGenerateWindow(&generatedN);
+            break;
+        case LOOKUP_OPTION:
+            showLookupWindow(countTable, generatedN);
             break;
         }
     }
