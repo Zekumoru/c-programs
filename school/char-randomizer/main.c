@@ -19,14 +19,21 @@ enum Options {
 
 int main()
 {
+    srand(time(NULL));
     initscr();
 
+    int *countTable;
     int option;
     while ((option = showMenuWindow("Character Generator", options, optionsSize)) != EXIT_OPTION) {
-        
+        switch (option) {
+        case GENERATE_OPTION:
+            countTable = showGenerateWindow();
+            break;
+        }
     }
 
     endwin();
+    free(countTable);
 
     return 0;
 }

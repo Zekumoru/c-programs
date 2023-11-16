@@ -2,6 +2,7 @@
     "files.associations": {
         "randomizer.h": "c",
         "stdio.h": "c",
-        "ncurses.h": "c"
+        "ncurses.h": "c",
+        "stdbool.h": "c"
     }
 }
