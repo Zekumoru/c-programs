@@ -1,21 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ncurses.h>
 #include "lib/randomizer.h"
+#include "lib/ui.h"
+
+const int optionsSize = 3;
+const char *options[] = {
+    "Generate",
+    "Lookup",
+    "Exit"
+};
+enum Options {
+    GENERATE_OPTION,
+    LOOKUP_OPTION,
+    EXIT_OPTION
+};
 
 int main()
 {
-    srand(time(NULL));
+    initscr();
 
-    int *countTable = generateCountTable(10000);
+    int option;
+    while ((option = showMenuWindow("Character Generator", options, optionsSize)) != EXIT_OPTION) {
+        
+    }
 
-    char input;
-    printf("Enter character to see its count: ");
-    scanf(" %c", &input);
-
-    printf("'%c' occurred %d times in 10K generated characters!\n", input, countTable[getTableKey(input)]);
-
-    free(countTable);
+    endwin();
 
     return 0;
 }
