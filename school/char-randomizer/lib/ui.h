@@ -7,10 +7,12 @@
 void wprintwln(WINDOW *window, const char *fmt, ...);
 bool isEnterKey(int key);
 
+WINDOW *createInteractiveWindow();
 void destroyWindow(WINDOW *window);
 
 int showMenuWindow(const char *title, const char *options[], int optionsSize);
 int *showGenerateWindow(int *num);
 void showLookupWindow(int* countTable, int generatedN);
+void showListCounts(int* countTable, int generatedN);
 
 #endif // UI_H

@@ -5,15 +5,17 @@
 #include "lib/randomizer.h"
 #include "lib/ui.h"
 
-const int optionsSize = 3;
+const int optionsSize = 4;
 const char *options[] = {
     "Generate",
     "Lookup",
+    "List Counts",
     "Exit"
 };
 enum Options {
     GENERATE_OPTION,
     LOOKUP_OPTION,
+    LIST_COUNTS_OPTION,
     EXIT_OPTION
 };
 
@@ -33,6 +35,9 @@ int main()
             break;
         case LOOKUP_OPTION:
             showLookupWindow(countTable, generatedN);
+            break;
+        case LIST_COUNTS_OPTION:
+            showListCounts(countTable, generatedN);
             break;
         }
     }

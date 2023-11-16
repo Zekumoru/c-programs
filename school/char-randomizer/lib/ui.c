@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <stdbool.h>
 #include "randomizer.h"
+#include "utils.h"
 
 void wprintwln(WINDOW *window, const char *fmt, ...)
 {
@@ -20,6 +21,18 @@ bool isEnterKey(int key)
     return key == KEY_ENTER || key == '\n' || key == '\r';
 }
 
+WINDOW *createInteractiveWindow()
+{
+    noecho(); // turn off pressed keys printing out
+    curs_set(0); // hide cursor
+    keypad(stdscr, true); // allow arrow keys press
+
+    WINDOW *window = newwin(LINES, COLS, 0, 0);
+    refresh();
+
+    return window;
+}
+
 void destroyWindow(WINDOW *window)
 {
     wclear(window);
@@ -29,12 +42,7 @@ void destroyWindow(WINDOW *window)
 
 int showMenuWindow(const char *title, const char *options[], int optionsSize)
 {
-    noecho(); // turn off pressed keys printing out
-    curs_set(0); // hide cursor
-    keypad(stdscr, true); // allow arrow keys press
-
-    WINDOW *menu = newwin(LINES, COLS, 0, 0);
-    refresh();
+    WINDOW *menu = createInteractiveWindow();
 
     int choice = -1;
     int input;
@@ -75,12 +83,7 @@ int showMenuWindow(const char *title, const char *options[], int optionsSize)
 
 int *showGenerateWindow(int *_num)
 {
-    noecho(); // turn off pressed keys printing out
-    curs_set(0); // hide cursor
-    keypad(stdscr, true); // allow arrow keys press
-
-    WINDOW *window = newwin(LINES, COLS, 0, 0);
-    refresh();
+    WINDOW *window = createInteractiveWindow();
 
     int num = 100;
     int input = 0;
@@ -127,12 +130,7 @@ int *showGenerateWindow(int *_num)
 
 void showLookupWindow(int* countTable, int generatedN)
 {
-    noecho(); // turn off pressed keys printing out
-    curs_set(0); // hide cursor
-    keypad(stdscr, true); // allow arrow keys press
-
-    WINDOW *window = newwin(LINES, COLS, 0, 0);
-    refresh();
+    WINDOW *window = createInteractiveWindow();
 
     int input = 0;
     while (input != KEY_BACKSPACE) {
@@ -156,4 +154,27 @@ void showLookupWindow(int* countTable, int generatedN)
     }
 
     destroyWindow(window);
+}
+
+void showListCounts(int* countTable, int generatedN)
+{
+    endwin();
+
+    if (countTable != NULL) {
+        println("Showing count table with %d generated characters", generatedN);
+        println("");
+        
+        for (size_t i = 0; i < CHAR_TOTAL; i++) {
+            println("[%c]: %d", (char)(i + CHAR_START), countTable[i]);
+        }
+    } else {
+        println("No characters have been generated yet!");
+        println("");
+    }
+
+    println("Press 'Enter' to return to menu...");
+    println("");
+    getln();
+
+    initscr();
 }
