@@ -78,12 +78,12 @@ int showInteractiveMenu(const char *title, const char *options[], int optionsSiz
 
         input = getch();
 
-        if (input == KEY_DOWN) {
+        if (input == KEY_DOWN || input == 'S' || input == 's') {
             highlight++;
             if (highlight > (optionsSize - 1)) {
                 highlight = 0;
             }
-        } else if (input == KEY_UP) {
+        } else if (input == KEY_UP || input == 'W' || input == 'w') {
             highlight--;
             if (highlight < 0) {
                 highlight = (optionsSize - 1);
