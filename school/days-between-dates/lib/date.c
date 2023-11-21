@@ -21,11 +21,12 @@ int daysSinceStartOfYear(Date *date)
     // minus 2 days because of February
     // not minus 3 days since the other 1 day is
     // calculated with diffFH
-    int days = date->month * 31 - 2 + date->day;
+    int days = date->month * 31 + date->day;
+    if (date->month > FEBRUARY) days -= 2 - (isLeapYear(date->year)? 1 : 0);
 
     // diff first half of year
     // basically how many 30-days month before JULY
-    int diffFH = JULY - date->month;
+    int diffFH = date->month;
     if (date->month > JULY) diffFH = JULY;
     diffFH /= 2;
 
@@ -48,12 +49,27 @@ int countLeapYearsBetween(int y1, int y2)
     return abs(countTotalLeapYears(y1) - countTotalLeapYears(y2));
 }
 
+bool shouldRemoveLeapYear(Date *d1, Date* d2)
+{
+    return !isLeapYear(d1->year) && isLeapYear(d2->year) && d1->year < d2->year && d2->month == FEBRUARY && d2->day < 29;
+}
+
 int countDays(Date *d1, Date *d2)
 {
     int days1 = daysSinceStartOfYear(d1);
-    int days2 = 365 - daysSinceStartOfYear(d2);
-    int days = (abs(d1->year - d2->year) - 1) * 365 + days1 + days2;
-    return abs(days + countLeapYearsBetween(d1->year, d2->year));
+    int days2 = daysSinceStartOfYear(d2);
+    int days = abs(d1->year - d2->year) * 365;
+
+    if (d2->year > d1->year) days += days2 - days1; 
+    else if (d1->year > d2->year) days += days1 - days2;
+    else days += abs(days1 - days2);
+
+    int leapYearsBetween = countLeapYearsBetween(d1->year, d2->year);
+    if (shouldRemoveLeapYear(d1, d2) || shouldRemoveLeapYear(d2, d1)) {
+        leapYearsBetween--;
+    }
+
+    return days + leapYearsBetween;
 }
 
 bool isLeapYear(int year)
