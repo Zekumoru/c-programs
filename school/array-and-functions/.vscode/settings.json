@@ -1,0 +1,8 @@
+{
+    "cmake.configureOnOpen": false,
+    "files.associations": {
+        "float.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c"
+    }
+}
