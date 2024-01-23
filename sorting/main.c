@@ -10,7 +10,7 @@ int main()
   printArray(array, arraySize);
   printf("\n");
 
-  quicksort(array, arraySize);
+  mergesort(array, arraySize);
 
   printArray(array, arraySize);
   printf("\n");
